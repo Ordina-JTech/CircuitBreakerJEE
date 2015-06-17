@@ -1,7 +1,7 @@
 package nl.ordina.reactive.circuitbreaker;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import javax.annotation.Resource;
 import javax.enterprise.concurrent.ManagedExecutorService;
 import javax.enterprise.inject.Produces;
@@ -12,7 +12,7 @@ public class CircuitBreakerProducer {
     @Resource(lookup = "concurrent/myExecutor")
     private ManagedExecutorService exs;
     
-    private static final Map<String, CircuitBreaker> circuitBreakers = new HashMap<>();
+    private static final Map<String, CircuitBreaker> circuitBreakers = new ConcurrentHashMap<>();
 
     @Produces
     public CircuitBreaker createCircuitPreaker(InjectionPoint injectionPoint) {
