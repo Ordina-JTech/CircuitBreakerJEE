@@ -23,6 +23,8 @@ public class CircuitBreakerImpl<T> implements CircuitBreaker<T> {
     private static final Logger LOG = Logger.getLogger(CircuitBreakerImpl.class.getName());
     private final ExecutorService executorService;
 
+    private String  key;
+
     // This is the default config which will be used if the CircuitbreakerConfig is not used.
     private int errorsThreshold = 5; // amount of faults that are allowed to happen before the circuitbreaker opens.
     private long sleepWindow = 5000; //milliseconds
@@ -33,11 +35,12 @@ public class CircuitBreakerImpl<T> implements CircuitBreaker<T> {
 
     private State state = CLOSED;
 
-    public CircuitBreakerImpl(ExecutorService exs, long timeOut, long sleepWindow, int errorsTreshold) {
-        this.executorService = exs;
+    public CircuitBreakerImpl(String key, ExecutorService exs, long timeOut, long sleepWindow, int errorsTreshold) {
+    	this.executorService = exs;
         this.timeOut = timeOut;
         this.sleepWindow = sleepWindow;
         this.errorsThreshold = errorsTreshold;
+        this.key = key;
     }
 
     /**
@@ -45,8 +48,9 @@ public class CircuitBreakerImpl<T> implements CircuitBreaker<T> {
      *
      * @param exs
      */
-    public CircuitBreakerImpl(ExecutorService exs) {
+    public CircuitBreakerImpl(String key, ExecutorService exs ) {
         this.executorService = exs;
+        this.key = key;
     }
 
     /**
@@ -125,4 +129,12 @@ public class CircuitBreakerImpl<T> implements CircuitBreaker<T> {
         }
         return new CircuitBreakerException(ex);
     }
+
+	@Override
+	public String toString() {
+		return "CircuitBreakerImpl [key=" + key + "]";
+	}
+    
+    
+    
 }

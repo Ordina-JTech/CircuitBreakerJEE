@@ -18,7 +18,7 @@ public class CircuitBreakerProducer {
 
 	@Produces
     public <T> CircuitBreaker<T> createCircuitBreaker(InjectionPoint injectionPoint) {
-        String key = injectionPoint.getBean().getBeanClass().getName();
+        String key = injectionPoint.getBean().getBeanClass().getName() + "." + injectionPoint.getMember().getName();
         @SuppressWarnings("unchecked")
 		CircuitBreaker<T> cb = (CircuitBreaker<T>) circuitBreakers.get(key);
         if (cb != null) {
@@ -26,9 +26,9 @@ public class CircuitBreakerProducer {
         }
         CircuitBreakerConfig config = injectionPoint.getAnnotated().getAnnotation(CircuitBreakerConfig.class);
         if (config == null) {
-            cb = new CircuitBreakerImpl<T>(exs);
+            cb = new CircuitBreakerImpl<T>(key, exs);
         } else {
-            cb = new CircuitBreakerImpl<T>(exs, config.timeOut(), config.sleepWindow(), config.errorsThreshold());
+            cb = new CircuitBreakerImpl<T>(key, exs, config.timeOut(), config.sleepWindow(), config.errorsThreshold());
         }
         circuitBreakers.put(key, cb);
         return cb;
