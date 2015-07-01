@@ -12,6 +12,7 @@ public class CircuitBreakerProducer {
     @Resource(lookup = "concurrent/myExecutor")
     private ManagedExecutorService exs;
     
+    //This is not ideal, CircuitBreaker may be created twice but the last created CircuitBreaker will be used.
     private static final Map<String, CircuitBreaker> circuitBreakers = new ConcurrentHashMap<>();
 
     @Produces
