@@ -16,7 +16,7 @@ public class CircuitBreakerProducer {
     private static final Map<String, CircuitBreaker> circuitBreakers = new ConcurrentHashMap<>();
 
     @Produces
-    public <T> CircuitBreaker<T> createCircuitPreaker(InjectionPoint injectionPoint) {
+    public <T> CircuitBreaker<T> createCircuitBreaker(InjectionPoint injectionPoint) {
         String key = injectionPoint.getBean().getBeanClass().getName();
         CircuitBreaker cb = circuitBreakers.get(key);
         if (cb != null) {
