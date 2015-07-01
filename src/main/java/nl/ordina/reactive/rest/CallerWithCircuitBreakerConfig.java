@@ -12,7 +12,7 @@ public class CallerWithCircuitBreakerConfig {
 
     @Inject
     @CircuitBreakerConfig(timeOut = 5000, errorsThreshold = 3, sleepWindow = 5000)
-    private CircuitBreaker configuredCircuitBreaker;
+    private CircuitBreaker<String> configuredCircuitBreaker;
 
     @GET
     @Path("/cb")

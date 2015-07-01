@@ -10,7 +10,7 @@ import nl.ordina.reactive.extservices.SlowSupplier;
 public class Caller {
     
     @Inject
-    private CircuitBreaker circuitBreaker;
+    private CircuitBreaker<String> circuitBreaker;
 
     @Path("/direct")
     @GET
@@ -21,7 +21,7 @@ public class Caller {
     @GET
     @Path("/cb")
     public String call() {
-        return   circuitBreaker.call(SlowSupplier::supplierMethod);
+        return  circuitBreaker.call(SlowSupplier::supplierMethod);
     }
     
     @GET
