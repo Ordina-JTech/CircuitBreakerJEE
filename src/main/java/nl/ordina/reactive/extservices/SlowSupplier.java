@@ -10,7 +10,7 @@ import java.util.logging.Logger;
  */
 public class SlowSupplier {
 
-    public static long sleep = 50;
+    public static long sleep = 3000;
 
     public static String supplierMethod() {
         try {
