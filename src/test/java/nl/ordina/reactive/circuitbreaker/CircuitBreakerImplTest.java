@@ -22,7 +22,7 @@ public class CircuitBreakerImplTest {
 
     @Test
     public void normalOperation() {
-        CircuitBreaker<String> cb = new CircuitBreakerImpl(ex, 500, 500, 3);
+        CircuitBreaker<String> cb = new CircuitBreakerImpl("key", ex, 500, 500, 3);
         assertEquals(State.CLOSED, cb.getState()); // default state is closed
         assertEquals("testCall", cb.call(TestSupplier::testCall));
         assertEquals(State.CLOSED, cb.getState()); // stay closed
@@ -31,7 +31,7 @@ public class CircuitBreakerImplTest {
 
     @Test
     public void testErrorCount() {
-        CircuitBreaker<String> cb = new CircuitBreakerImpl(ex, 500, 500, 3);
+        CircuitBreaker<String> cb = new CircuitBreakerImpl("key", ex, 500, 500, 3);
         assertEquals("testcallex", CallTestMethodWithException(cb).getCause().getMessage());
         assertEquals("testcallex", CallTestMethodWithException(cb).getCause().getMessage());
         assertEquals("testcallex", CallTestMethodWithException(cb).getCause().getMessage());
@@ -44,7 +44,7 @@ public class CircuitBreakerImplTest {
 
     @Test
     public void testSleepWindow() throws InterruptedException {
-        CircuitBreaker<String> cb = new CircuitBreakerImpl(ex, 500, 500, 3);
+        CircuitBreaker<String> cb = new CircuitBreakerImpl("key", ex, 500, 500, 3);
         assertEquals("testcallex", CallTestMethodWithException(cb).getCause().getMessage());
         assertEquals("testcallex", CallTestMethodWithException(cb).getCause().getMessage());
         assertEquals("testcallex", CallTestMethodWithException(cb).getCause().getMessage());
@@ -60,7 +60,7 @@ public class CircuitBreakerImplTest {
 
     @Test
     public void testSleepWindowFailingCall() throws InterruptedException {
-        CircuitBreaker<String> cb = new CircuitBreakerImpl(ex, 500, 500, 3);
+        CircuitBreaker<String> cb = new CircuitBreakerImpl("key", ex, 500, 500, 3);
         assertEquals("testcallex", CallTestMethodWithException(cb).getCause().getMessage());
         assertEquals("testcallex", CallTestMethodWithException(cb).getCause().getMessage());
         assertEquals("testcallex", CallTestMethodWithException(cb).getCause().getMessage());
