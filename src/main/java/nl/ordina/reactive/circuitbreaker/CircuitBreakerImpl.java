@@ -9,7 +9,9 @@ import java.util.concurrent.TimeoutException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.function.Supplier;
-import static nl.ordina.reactive.circuitbreaker.CircuitBreaker.State.*;
+import static nl.ordina.reactive.circuitbreaker.State.CLOSED;
+import static nl.ordina.reactive.circuitbreaker.State.HALFOPEN;
+import static nl.ordina.reactive.circuitbreaker.State.OPEN;
 
 /**
  * This class is a circuit breaker implementation meant for the call of supplier
@@ -54,6 +56,12 @@ public class CircuitBreakerImpl<T> implements CircuitBreaker<T> {
     @Override
     public State getState() {
         return state;
+    }
+    
+    @Override
+    public void setState(State state ) {
+        this.reset();
+        this.state = state;
     }
 
     /**

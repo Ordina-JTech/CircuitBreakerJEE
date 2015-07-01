@@ -23,9 +23,9 @@ public class CircuitBreakerImplTest {
     @Test
     public void normalOperation() {
         CircuitBreaker<String> cb = new CircuitBreakerImpl(ex, 500, 500, 3);
-        assertEquals(CircuitBreaker.State.CLOSED, cb.getState()); // default state is closed
+        assertEquals(State.CLOSED, cb.getState()); // default state is closed
         assertEquals("testCall", cb.call(TestSupplier::testCall));
-        assertEquals(CircuitBreaker.State.CLOSED, cb.getState()); // stay closed
+        assertEquals(State.CLOSED, cb.getState()); // stay closed
 
     }
 
@@ -54,7 +54,7 @@ public class CircuitBreakerImplTest {
         Thread.sleep(1000);
         // cb halfopen, should be closed again after normal cal
         assertEquals("testCall", cb.call(TestSupplier::testCall));
-        assertEquals(CircuitBreaker.State.CLOSED, cb.getState());
+        assertEquals(State.CLOSED, cb.getState());
 
     }
 
@@ -70,7 +70,7 @@ public class CircuitBreakerImplTest {
         Thread.sleep(1000);
         // cb should be still open again after execption cal
         assertEquals("testcallex", CallTestMethodWithException(cb).getCause().getMessage());
-        assertEquals(CircuitBreaker.State.OPEN, cb.getState());
+        assertEquals(State.OPEN, cb.getState());
 
     }
 

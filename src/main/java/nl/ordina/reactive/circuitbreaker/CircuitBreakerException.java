@@ -2,7 +2,7 @@ package nl.ordina.reactive.circuitbreaker;
 
 public class CircuitBreakerException extends RuntimeException {
 
-    public CircuitBreakerException(CircuitBreaker.State state) {
+    public CircuitBreakerException(State state) {
         super(state.name());
     }
 
