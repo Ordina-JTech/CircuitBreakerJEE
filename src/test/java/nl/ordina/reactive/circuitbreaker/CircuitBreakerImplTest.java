@@ -7,8 +7,8 @@ import org.junit.Test;
 
 public class CircuitBreakerImplTest {
 
-    private ExecutorService ex = Executors.newCachedThreadPool();
-    
+    private final ExecutorService ex = Executors.newCachedThreadPool();
+
     public static class TestSupplier {
 
         public static String testCallException() {
@@ -77,8 +77,8 @@ public class CircuitBreakerImplTest {
     private Exception CallTestMethodWithException(CircuitBreaker<String> cb) {
         try {
             cb.call(TestSupplier::testCallException);
-        } catch (CircuitBreakerException ex) {
-            return ex;
+        } catch (CircuitBreakerException e) {
+            return e;
         }
         return null;
     }

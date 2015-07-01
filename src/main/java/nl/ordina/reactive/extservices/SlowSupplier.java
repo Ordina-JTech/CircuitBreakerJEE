@@ -7,9 +7,9 @@ import java.util.logging.Logger;
  * This class is meant to simulate a slow supplier.
  * It will only return a string, and the slowness of the supplier can be set using the supplier rest resource.
  * This resource can be found in the class 'SupplierSleep'.
-*/
-public class SlowSupplier  {
-    
+ */
+public class SlowSupplier {
+
     public static long sleep = 50;
 
     public static String supplierMethod() {

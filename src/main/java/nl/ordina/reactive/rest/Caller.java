@@ -12,7 +12,7 @@ import nl.ordina.reactive.extservices.SlowSupplier;
 
 @Path("/caller")
 public class Caller {
-    
+
     @Inject
     private CircuitBreaker<String> circuitBreaker;
 
@@ -21,23 +21,23 @@ public class Caller {
     public String callDirect() {
         return SlowSupplier.supplierMethod();
     }
-    
+
     @GET
     @Path("/cb")
     public String call() {
-        return  circuitBreaker.call(SlowSupplier::supplierMethod);
+        return circuitBreaker.call(SlowSupplier::supplierMethod);
     }
-    
+
     @GET
     @Path("cb_state")
     public String getCbState() {
         return circuitBreaker.getState().toString();
     }
-    
-      @POST
+
+    @POST
     @Path("cb_state")
     @Consumes(MediaType.TEXT_PLAIN)
-    public void setCbState( String state) {
+    public void setCbState(String state) {
         circuitBreaker.setState(State.valueOf(state.trim()));
     }
 }

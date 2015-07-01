@@ -15,7 +15,7 @@ import nl.ordina.reactive.extservices.SlowSupplier;
 public class CallerWithCircuitBreakerConfig {
 
     @Inject
-    @CircuitBreakerConfig(timeOut = 5000, errorsThreshold = 3, sleepWindow = 50000)
+    @CircuitBreakerConfig(timeOut = 5000, errorsThreshold = 3, sleepWindow = 5000)
     private CircuitBreaker<String> configuredCircuitBreaker;
 
     @GET
@@ -29,11 +29,11 @@ public class CallerWithCircuitBreakerConfig {
     public String getCbState() {
         return configuredCircuitBreaker.getState().toString();
     }
-    
+
     @POST
     @Path("cb_state")
     @Consumes(MediaType.TEXT_PLAIN)
-    public void setCbState( String state) {
+    public void setCbState(String state) {
         configuredCircuitBreaker.setState(State.valueOf(state.trim()));
     }
 }

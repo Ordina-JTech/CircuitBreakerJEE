@@ -16,6 +16,7 @@ import static nl.ordina.reactive.circuitbreaker.State.OPEN;
 /**
  * This class is a circuit breaker implementation meant for the call of supplier
  * that returns T.
+ * @param <T>
  */
 public class CircuitBreakerImpl<T> implements CircuitBreaker<T> {
 
@@ -57,9 +58,9 @@ public class CircuitBreakerImpl<T> implements CircuitBreaker<T> {
     public State getState() {
         return state;
     }
-    
+
     @Override
-    public void setState(State state ) {
+    public void setState(State state) {
         this.reset();
         this.state = state;
     }
