@@ -2,11 +2,13 @@ package nl.ordina.reactive.circuitbreaker;
 
 public class CircuitBreakerException extends RuntimeException {
 
-    public CircuitBreakerException(State state) {
-        super(state.name());
-    }
+	private static final long serialVersionUID = 1L;
 
-    public CircuitBreakerException(Throwable ex) {
-        super(ex);
-    }
+	public CircuitBreakerException(State state) {
+		super(state.name());
+	}
+
+	public CircuitBreakerException(Throwable ex) {
+		super(ex);
+	}
 }
